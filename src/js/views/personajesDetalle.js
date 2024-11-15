@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 import "../../styles/tarjetasDetalles.css";
 import img800x600 from "../../img/800x600.jpg";
 
-export const PlanetaDetalle = () => {
+export const PersonajeDetalle = () => {
 
     const { store, actions } = useContext(Context);
     const params = useParams();
@@ -20,10 +20,9 @@ export const PlanetaDetalle = () => {
                     </div>
 
                     <div className="col-4 informacionPersonaje">
-                        <h2>{store.planetas[params.planeta].name}</h2>
+                        <h2>{store.personajes[params.personaje].name}</h2>
                         <p>
-
-                            En los confines del universo, un mundo se alza como testigo de innumerables historias. Sus paisajes evocan maravillas desconocidas y sus cielos, constelaciones de misterios por descubrir. Un planeta en el que los secretos ancestrales se entrelazan con el palpitar de la vida, despertando la curiosidad de viajeros y la envidia de soñadores. En su esencia, es un lugar que atesora leyendas y susurra promesas de aventuras sin fin.</p>
+                            El enigmático ser que surca las galaxias, forjado por la dualidad del bien y el mal, despierta la admiración de muchos. Sus decisiones moldean destinos y desatan épicas batallas, sumergiéndonos en un torbellino de emociones. Su legado trasciende límites, siendo tanto héroe como villano, cautivando con una historia que despierta la fuerza en cada uno de nosotros.</p>
                     </div>
 
                     <div className="container-flex text-center">
@@ -42,19 +41,19 @@ export const PlanetaDetalle = () => {
                                 <tbody>
                                     <tr>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">Diametro</th>
-                                        <th scope="col">Clima</th>
-                                        <th scope="col">Topografía</th>
-                                        <th scope="col">Población</th>
-                                        <th scope="col">Agua superficial</th>
+                                        <th scope="col">Año de nacimiento</th>
+                                        <th scope="col">Género</th>
+                                        <th scope="col">Altura</th>
+                                        <th scope="col">Color de piel</th>
+                                        <th scope="col">Color de ojos</th>
                                     </tr>
                                     <tr>
-                                        <td>{store.planetas[params.planeta].name}</td>
-                                        <td>{store.planetas[params.planeta].diameter}</td>
-                                        <td>{store.planetas[params.planeta].climate}</td>
-                                        <td>{store.planetas[params.planeta].terrain}</td>
-                                        <td>{store.planetas[params.planeta].population}</td>
-                                        <td>{store.planetas[params.planeta].surface_water}</td>
+                                        <td>{store.personajes[params.personaje].name}</td>
+                                        <td>{store.personajes[params.personaje].birth_year}</td>
+                                        <td>{store.personajes[params.personaje].gender}</td>
+                                        <td>{store.personajes[params.personaje].height}</td>
+                                        <td>{store.personajes[params.personaje].skin_color}</td>
+                                        <td>{store.personajes[params.personaje].eye_color}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -62,10 +61,12 @@ export const PlanetaDetalle = () => {
                     </div>
                 </div>
             </div>
+
         </>
+
     );
 };
 
-PlanetaDetalle.propTypes = {
+PersonajeDetalle.propTypes = {
     match: PropTypes.object
 };
