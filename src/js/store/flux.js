@@ -1,43 +1,53 @@
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+
+			personajes: [],
+			naves: [],
+			planetas: [],
+			fav: [],
 		},
+
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
+
+			//Función para filtrar y mostrar los favoritos en el navbar
+			favorito: (nombreFav) => {
+
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+				if (store.fav.includes(nombreFav)) {
+					setStore({ fav: store.fav.filter((repetido) => repetido != nombreFav) });
+				}
+				else {
+					setStore({ fav: [...store.fav, nombreFav] });
+				}
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			//Función que comprueba si el array contiene el nombre para luego cambiar el color del corazón
+			corazonColor: name => {
+				const store = getStore();
+				return store.fav.includes(name);
+			},
+
+
+			loadSomeData: () => {
+
+				//Traer a los personajes
+				fetch("https://swapi.dev/api/people")
+					.then((response) => response.json())
+					.then((data) => setStore({ personajes: data.results }))
+
+				//Traer a las naves
+				fetch("https://swapi.dev/api/starships")
+					.then((response) => response.json())
+					.then((data) => setStore({ naves: data.results }))
+
+				//Traer a los planetas
+				fetch("https://swapi.dev/api/planets")
+					.then((response) => response.json())
+					.then((data) => setStore({ planetas: data.results }))
+			},
 		}
 	};
 };
